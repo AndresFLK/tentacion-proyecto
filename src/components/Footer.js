@@ -14,7 +14,7 @@ export default function Footer(){
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
                     <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Restaurante Tentacion</div></div>
                     <div class="col-auto">
-                        <CustomLink to="/us" className="link-light small">Sobre Nosotros</CustomLink>
+                        <CustomLink to="/nosotros" className="link-light small">Sobre Nosotros</CustomLink>
                         <CustomLink to="/contact" className="link-light small">Contacto</CustomLink>
                     </div>
                 </div>

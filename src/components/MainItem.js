@@ -8,9 +8,6 @@ export default function MainItem({titulo, desc, ...props}){
                             <div class="row gx-0">
                                 <div class="col-lg-6 col-xl-5 py-lg-5">
                                     <div class="p-4 p-md-5">
-                                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">
-                                            #1 Mas Pedido
-                                        </div>
                                         <div class="h2 fw-bolder">
                                             {titulo}
                                         </div>

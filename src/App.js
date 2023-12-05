@@ -11,6 +11,7 @@ import VerPedidos from './pages/Administrative/VerPedidos';
 import VerReservas from './pages/Administrative/VerReservas';
 import Publicidad from './pages/Client/Publicidad';
 import VerReserva from './pages/Client/VerReserva';
+import Nosotros from './pages/Informatives/About';
 import Contact from './pages/Informatives/Contact';
 import Home from "./pages/Informatives/Home";
 import Menu from './pages/Menu';
@@ -55,6 +56,7 @@ function App() {
           <Route path="/ordenes" element={<VerOrdenes />} />
           <Route path="/reserva" element={<VerReserva />} />
           <Route path="/reservas" element={<VerReservas />} />
+          <Route path="/nosotros" element={<Nosotros />} />
         </Routes>
       </div>
       <Footer />
