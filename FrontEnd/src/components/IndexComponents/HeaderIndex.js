@@ -20,7 +20,7 @@ export default function HeaderIndex(){
                     </div>
                 </div>
                 <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                    <img class="img-fluid rounded-3 my-5" src="https://scontent.fsjo10-1.fna.fbcdn.net/v/t39.30808-6/277569183_266717375669050_4407849763631722809_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=783fdb&_nc_ohc=T6HI0qtRYl0AX85NWTX&_nc_ht=scontent.fsjo10-1.fna&oh=00_AfCH5C6e4gbJW67fqp4G4pZHWP5dweQilV0Y6R-8AO5rmQ&oe=65732F55" alt="..." />
+                    <img class="img-fluid rounded-3 my-5" src="https://scontent.fpac1-3.fna.fbcdn.net/v/t39.30808-6/277569183_266717375669050_4407849763631722809_n.jpg?stp=dst-jpg_s960x960&_nc_cat=101&ccb=1-7&_nc_sid=783fdb&_nc_ohc=i5X6TpT5UwIAX_tQk8Y&_nc_ht=scontent.fpac1-3.fna&oh=00_AfBvojGGgPIF909J_6de0Eu2TSLTxemaqv3knFhss8ggyw&oe=65AE82D5" alt="..." />
                 </div>
                 </div>
             </div>

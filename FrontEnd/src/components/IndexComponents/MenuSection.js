@@ -1,3 +1,5 @@
+import { ButtonLink } from "../Button"
+
 
 export default function MenuSection(){
     return (
@@ -63,7 +65,8 @@ export default function MenuSection(){
             </div>
                 </div>
                 <div class="text-center">
-                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Ver Menu Completo</a>
+                <ButtonLink to={"/menu"} className="btn btn-primary btn-lg px-4 me-sm-3">Ver Menu Completo</ButtonLink>
+                
                 </div>
             </div>
         </section>
