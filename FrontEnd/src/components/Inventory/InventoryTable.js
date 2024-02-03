@@ -72,7 +72,7 @@ export function CustomTrTd({data, toggleModal}){
     return(
         <>
         <tr>
-            <th scope="row" style={{ textAlign: 'center' }} className="h">{data.id}</th>
+            <th scope="row" style={{ textAlign: 'center' }}>{data.id}</th>
             <td style={{ textAlign: 'center' }}>{data.nombre}</td>
             <td style={{ textAlign: 'center' }}>{data.descripcion}</td>
             <td>
