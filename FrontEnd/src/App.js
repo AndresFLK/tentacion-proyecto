@@ -27,9 +27,6 @@ import VerPedido from './pages/Users/VerPedido';
 
 
 function App() {
-
-
-
   return (
     <>
       <Navbar />
