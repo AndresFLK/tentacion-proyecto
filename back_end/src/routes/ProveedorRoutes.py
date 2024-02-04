@@ -31,7 +31,7 @@ def post_proveedores():
     try:
         nombre = request.json['nombre']
         proveedor = ProveedorService.post_proveedor(nombre)
-        return jsonify(proveedor), 201
+        return jsonify(proveedor.to_json()), 201
     except CustomException:
         return jsonify({'message': "ERROR", 'success': False})
 
