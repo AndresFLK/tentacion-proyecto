@@ -5,7 +5,7 @@ import "./Modal.css";
 
 export default function InventoryTable({th, data1, data2}){
 
-    const [modal, setModal] = useState(true);
+    const [modal, setModal] = useState(false);
 
     const toggleModal = () => {
         setModal(!modal);
