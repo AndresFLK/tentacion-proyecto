@@ -2,7 +2,7 @@
 from src.database.db import db
 from src.utils.errors.CustomException import CustomException
 # Models
-from src.services.models.Proveedor import Proveedor
+from .models import Proveedor
 
 class ProveedorService():
 

@@ -5,7 +5,7 @@ from src.utils.errors.CustomException import CustomException
 # Security
 from src.utils.Security import Security
 # Services
-from src.services.ProveedorService import ProveedorService 
+from src.services import ProveedorService
 
 main = Blueprint('proveedor_blueprint', __name__)
 
@@ -53,6 +53,6 @@ def delete_proveedores(id_proveedor: int):
 
     try:
         ProveedorService.delete_proveedor(id_proveedor)
-        return jsonify({'message': "Usuario borrado exitosamente"}), 200
+        return jsonify({'message': "Proveedor borrado exitosamente"}), 200
     except CustomException:
         return jsonify({'message': "ERROR", 'success': False})
