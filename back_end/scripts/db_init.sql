@@ -30,6 +30,65 @@ CREATE TABLE PRODUCTO_PROVEEDOR (
     FOREIGN KEY(id_proveedor) REFERENCES Proveedor(id_proveedor)
 );
 
+-- servicio
+CREATE TABLE SERVICIO(
+    id_servicio INT NOT NULL PRIMARY KEY,
+    id_empresa INT NOT NULL,
+    tiempo TIME NOT NULL,
+    imagen VARCHAR(50) NOT NULL,
+    FOREIGN KEY(id_empresa) REFERENCES EMPRESA(id_empresa)
+)
+
+-- empresa
+CREATE TABLE EMPRESA(
+    id_empresa INT NOT NULL PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL
+)
+
+-- usuario
+CREATE TABLE USUARIO(
+    cedula INT NOT NULL PRIMARY KEY,
+    telefono VARCHAR(10) NOT NULL,
+    contrasena VARCHAR(40) NOT NULL,
+    nombre VARCHAR(12) NOT NULL,
+    correo VARCHAR(20) NOT NULL,
+    prim_apellido VARCHAR(15) NOT NULL,
+    seg_apellido VARCHAR(15) NOT NULL,
+    id_rol INT NOT NULL,
+    FOREIGN KEY(id_rol) REFERENCES ROL(id_rol)
+)
+
+-- rol
+CREATE TABLE ROL(
+    id_rol INT NOT NULL PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL
+)
+
+-- reserva
+CREATE TABLE RESERVA(
+    id_reserva INT NOT NULL PRIMARY KEY,
+    fecha DATE NOT NULL,
+    nombre_reserva VARCHAR(25) NOT NULL,
+    id_usuario INT NOT NULL,
+    FOREIGN KEY(id_usuario) REFERENCES USUARIO(id_usuario)
+)
+
+-- pedido
+CREATE TABLE PEDIDO(
+    id_pedido INT NOT NULL PRIMARY KEY,
+    descripcion VARCHAR(60) NOT NULL,
+    precio FLOAT NOT NULL,
+    estado BOOLEAN NOT NULL,
+    id_usuario INT NOT NULL,
+    FOREIGN KEY(id_usuario) REFERENCES USUARIO(id_usuario)
+)
+
+-- orden
+CREATE TABLE ORDEN(
+    id_pedido INT NOT NULL PRIMARY KEY
+    FOREIGN KEY(id_pedido) REFERENCES PEDIDO(id_pedido),
+    
+)
 
 -- Dar permisos en tablas a rol
 -- Permisos de select
