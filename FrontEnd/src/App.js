@@ -2,12 +2,14 @@ import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navbar from "./components/Navbar";
 import CrearItem from './pages/Administrative/CrearItem';
+import CrearProveedor from './pages/Administrative/CrearProveedor';
 import CrearPublicidad from './pages/Administrative/CrearPublicidad';
 import VerClientes from './pages/Administrative/VerClientes';
 import VerPublicidades from './pages/Administrative/VerEspPubli';
 import VerInventario from './pages/Administrative/VerInventario';
 import VerOrdenes from './pages/Administrative/VerOrdenes';
 import VerPedidos from './pages/Administrative/VerPedidos';
+import VerProveedores from './pages/Administrative/VerProveedores';
 import VerReservas from './pages/Administrative/VerReservas';
 import Publicidad from './pages/Client/Publicidad';
 import VerReserva from './pages/Client/VerReserva';
@@ -54,6 +56,9 @@ function App() {
           <Route path="/reserva" element={<VerReserva />} />
           <Route path="/reservas" element={<VerReservas />} />
           <Route path="/nosotros" element={<Nosotros />} />
+          <Route path="/crearProveedor" element={<CrearProveedor />} />
+          <Route path="/proveedores" element={<VerProveedores />} />
+          
         </Routes>
       </div>
       <Footer />

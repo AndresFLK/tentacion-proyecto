@@ -25,9 +25,12 @@ export default function Navbar(){
                         <CustomLink to="/verPublicidades" className="dropdown-item">Ver Espacios Publicitarios</CustomLink>
                         <CustomLink to="/crearItem" className="dropdown-item">Crear Item</CustomLink>
                         <CustomLink to="/inventario" className="dropdown-item">Ver Inventario</CustomLink>
+                        <CustomLink to="/crearProveedor" className="dropdown-item">Crear Proveedor</CustomLink>
+                        <CustomLink to="/proveedores" className="dropdown-item">Ver Proveedores</CustomLink>
                         <CustomLink to="/pedidos" className="dropdown-item">Ver Pedidos</CustomLink>
                         <CustomLink to="/pedir" className="dropdown-item">Añadir Orden</CustomLink>
                         <CustomLink to="/ordenes" className="dropdown-item">Ver Ordenes</CustomLink>
+                        
                     </ul>
                 </li>
                 <ButtonLink to={"/pedir"} className="btn btn-primary">Ver Carrito</ButtonLink>
