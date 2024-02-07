@@ -55,6 +55,8 @@ CREATE TABLE USUARIO(
     prim_apellido VARCHAR(15) NOT NULL,
     seg_apellido VARCHAR(15) NOT NULL,
     id_rol INT NOT NULL,
+    id_direccion INT NOT NULL,
+    FOREIGN KEY(id_direccion) REFERENCES DIRECCION(id_direccion),
     FOREIGN KEY(id_rol) REFERENCES ROL(id_rol)
 )
 
@@ -85,9 +87,41 @@ CREATE TABLE PEDIDO(
 
 -- orden
 CREATE TABLE ORDEN(
-    id_pedido INT NOT NULL PRIMARY KEY
-    FOREIGN KEY(id_pedido) REFERENCES PEDIDO(id_pedido),
-    
+    id_orden INT NOT NULL PRIMARY KEY
+    precio FLOAT NOT NULL,
+    num_mesa INT NOT NULL,
+    descripcion VARCHAR(70),
+    estado BOOLEAN NOT NULL
+)
+
+--  direccion
+CREATE TABLE DIRECCION (
+    id_direccion INT NOT NULL PRIMARY KEY,
+    detalles VARCHAR(100) NOT NULL,
+    id_canton INT NOT NULL,
+    id_distrito INT NOT NULL,
+    FOREIGN KEY (id_canton) REFERENCES Canton(id_canton),
+    FOREIGN KEY (id_distrito) REFERENCES Distrito(id_distrito)
+);
+
+-- canton
+CREATE TABLE CANTON (
+    id_canton INT NOT NULL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    id_provincia INT NOT NULL,
+    FOREIGN KEY (id_provincia) REFERENCES PROVINCIA(id_provincia)
+)
+
+--  distrito
+CREATE TABLE DISTRITO(
+    id_distrito INT NOT NULL PRIMARY KEY,
+    nombre VARCHAR(30)
+)
+
+-- provincia
+CREATE TABLE PROVINCIA (
+    id_provincia INT NOT NULL PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL
 )
 
 -- Dar permisos en tablas a rol
