@@ -31,19 +31,21 @@ CREATE TABLE PRODUCTO_PROVEEDOR (
 );
 
 -- servicio
-CREATE TABLE SERVICIO(
-    id_servicio INT NOT NULL PRIMARY KEY,
+CREATE TABLE SERVICIO (
+    id_servicio SERIAL PRIMARY KEY,
     id_empresa INT NOT NULL,
-    tiempo TIME NOT NULL,
+    tiempo DATE NOT NULL,
     imagen VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(200) NOT NULL,
+    titulo VARCHAR(100)  NOT NULL,
     FOREIGN KEY(id_empresa) REFERENCES EMPRESA(id_empresa)
-)
+);
 
 -- empresa
-CREATE TABLE EMPRESA(
-    id_empresa INT NOT NULL PRIMARY KEY,
+CREATE TABLE EMPRESA (
+    id_empresa SERIAL PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL
-)
+);
 
 -- usuario
 CREATE TABLE USUARIO(
