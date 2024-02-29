@@ -12,7 +12,7 @@ export default function CrearPublicidad(){
                                 <h1 class="fw-bolder">Añadir Espacio Publicitario</h1>
                                 <p class="lead fw-normal text-muted mb-0">Llene los campos necesarios</p>
                         </div>
-                        <Form items={['Empresa', 'Tiempo']}>
+                        <Form items={['Empresa', 'Tiempo','Titulo', 'Descripcion']}>
                         <label for="formFile" class="form-label">Imagen Publicitaria</label>
                         <input class="form-control" type="file" id="formFile"></input>
                         <br /><br /><br />

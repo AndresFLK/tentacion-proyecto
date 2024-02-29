@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import CrearItem from './pages/Administrative/CrearItem';
 import CrearProveedor from './pages/Administrative/CrearProveedor';
 import CrearPublicidad from './pages/Administrative/CrearPublicidad';
+import EditarItem from './pages/Administrative/EditarItem';
+import EditarProveedor from './pages/Administrative/EditarProovedor';
 import VerClientes from './pages/Administrative/VerClientes';
 import VerPublicidades from './pages/Administrative/VerEspPubli';
 import VerInventario from './pages/Administrative/VerInventario';
@@ -58,7 +60,8 @@ function App() {
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/crearProveedor" element={<CrearProveedor />} />
           <Route path="/proveedores" element={<VerProveedores />} />
-          
+          <Route path="/editarItem" element={<EditarItem />} />
+          <Route path="/editarProovedor" element={<EditarProveedor />} />
         </Routes>
       </div>
       <Footer />
