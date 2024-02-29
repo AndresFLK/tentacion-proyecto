@@ -7,14 +7,14 @@ class Servicio(db.Model):
     titulo = db.Column(db.String(100), nullable = False)
     descripcion = db.Column(db.String(200), nullable = False)
     imagen = db.Column(db.String(100), nullable = False)
-    empresa = db.Column(db.Integer, db.ForeignKey('Empresa.id_empresa'), nullable = False)
+    id_empresa = db.Column(db.Integer, db.ForeignKey('empresa.id_empresa'), nullable = False)
 
-    def __init__(self, tiempo, titulo, descripcion, imagen, empresa) -> None:
+    def __init__(self, tiempo, titulo, descripcion, imagen, id_empresa) -> None:
        self.tiempo = tiempo
        self.descripcion = descripcion
        self.titulo = titulo
        self.imagen =  imagen
-       self.empresa = empresa
+       self.id_empresa = id_empresa
 
     def to_json(self):
         return {
@@ -22,6 +22,6 @@ class Servicio(db.Model):
             'titulo': self.titulo,
             'descripcion': self.descripcion,
             'tiempo': self.tiempo,
-            'empresa': self.empresa,
+            'empresa': self.empresa.nombre,
             'imagen': self.imagen
         }
