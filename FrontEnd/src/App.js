@@ -1,12 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
+import EditarEmpresa from './components/Companies/editarEmpresa';
 import Footer from './components/Footer';
 import Navbar from "./components/Navbar";
+import EditarEspacio from './components/Publicity/editarEspacio';
+import CrearEmpresa from './pages/Administrative/CrearEmpresa';
 import CrearItem from './pages/Administrative/CrearItem';
 import CrearProveedor from './pages/Administrative/CrearProveedor';
 import CrearPublicidad from './pages/Administrative/CrearPublicidad';
 import EditarItem from './pages/Administrative/EditarItem';
 import EditarProveedor from './pages/Administrative/EditarProovedor';
 import VerClientes from './pages/Administrative/VerClientes';
+import VerEmpresas from './pages/Administrative/VerEmpresas';
 import VerPublicidades from './pages/Administrative/VerEspPubli';
 import VerInventario from './pages/Administrative/VerInventario';
 import VerOrdenes from './pages/Administrative/VerOrdenes';
@@ -62,6 +66,11 @@ function App() {
           <Route path="/proveedores" element={<VerProveedores />} />
           <Route path="/editarItem" element={<EditarItem />} />
           <Route path="/editarProovedor" element={<EditarProveedor />} />
+          <Route path="/editarEspacio" element={<EditarEspacio />} />
+          <Route path="/crearEmpresa" element={<CrearEmpresa />} />
+          <Route path="/verEmpresas" element={<VerEmpresas />} />
+          <Route path="/editarEmpresa" element={<EditarEmpresa />} />
+
         </Routes>
       </div>
       <Footer />

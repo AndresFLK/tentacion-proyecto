@@ -3,7 +3,7 @@ import { ButtonLink } from "../Button";
 import "../Modal/Modal.css";
 
 
-export default function PublicityTable({th, data1, data2}){
+export default function CompanyTable({th, data1, data2}){
 
     const [modal, setModal] = useState(false);
 
@@ -75,7 +75,7 @@ export function CustomTrTd({data, toggleModal}){
             <th scope="row" style={{ textAlign: 'center' }}>{data.id}</th>
             <td style={{ textAlign: 'center' }}>{data.nombre}</td>
             <td style={{ textAlign: 'center' }}>
-            <ButtonLink to={"/editarEspacio"} className="btn btn-primary profile-button" type="button">Editar</ButtonLink>
+            <ButtonLink to={"/editarEmpresa"} className="btn btn-primary profile-button" type="button">Editar</ButtonLink>
             </td>
             <td style={{ textAlign: 'center' }}>
             <button 
