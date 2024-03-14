@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { ButtonLink } from "../Button";
 import "../Modal/Modal.css";
-
 
 
 export default function InventoryTable({th, data1, data2}){
@@ -84,7 +84,9 @@ export function CustomTrTd({data, toggleModal}){
             </td>
             <td style={{ textAlign: 'center' }}>{data.precioUnitario}</td>
             <td style={{ textAlign: 'center' }}>{data.proveedor}</td>
-            <td style={{ textAlign: 'center' }}><button class="btn btn-primary profile-button" type="button" >Editar</button></td>
+            <td style={{ textAlign: 'center' }}>
+            <ButtonLink to={"/editarItem"} className="btn btn-primary profile-button" type="button">Editar</ButtonLink>
+            </td>
             <td style={{ textAlign: 'center' }}>
             <button 
                 onClick={toggleModal}

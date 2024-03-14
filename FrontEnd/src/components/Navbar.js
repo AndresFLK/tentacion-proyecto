@@ -21,16 +21,13 @@ export default function Navbar(){
                     <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
                         <CustomLink to="/verClientes" className="dropdown-item">Usuarios</CustomLink>
-                        <CustomLink to="/crearPublicidad" className="dropdown-item">Crear Espacio Publicitario</CustomLink>
                         <CustomLink to="/verPublicidades" className="dropdown-item">Ver Espacios Publicitarios</CustomLink>
-                        <CustomLink to="/crearItem" className="dropdown-item">Crear Item</CustomLink>
                         <CustomLink to="/inventario" className="dropdown-item">Ver Inventario</CustomLink>
-                        <CustomLink to="/crearProveedor" className="dropdown-item">Crear Proveedor</CustomLink>
                         <CustomLink to="/proveedores" className="dropdown-item">Ver Proveedores</CustomLink>
+                        <CustomLink to="/verEmpresas" className="dropdown-item">Ver Empresas</CustomLink>
                         <CustomLink to="/pedidos" className="dropdown-item">Ver Pedidos</CustomLink>
                         <CustomLink to="/pedir" className="dropdown-item">Añadir Orden</CustomLink>
                         <CustomLink to="/ordenes" className="dropdown-item">Ver Ordenes</CustomLink>
-                        
                     </ul>
                 </li>
                 <ButtonLink to={"/pedir"} className="btn btn-primary">Ver Carrito</ButtonLink>

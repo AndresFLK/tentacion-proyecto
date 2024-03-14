@@ -3,7 +3,7 @@ import { ButtonLink } from "../Button";
 import "../Modal/Modal.css";
 
 
-export default function SupplierTable({th, data1, data2}){
+export default function CompanyTable({th, data1, data2}){
 
     const [modal, setModal] = useState(false);
 
@@ -40,7 +40,7 @@ export default function SupplierTable({th, data1, data2}){
             <div className="overlay" onClick={toggleModal}>
                 <div className="modal-content">
                 <div style={{ textAlign: 'center', marginBottom: '10%'}}>
-                    <h4>¿Está seguro que desea borrar este proveedor?</h4>
+                    <h4>¿Está seguro que desea borrar este Espacio Publicitario?</h4>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', width: '50%', justifyContent: 'space-between', margin: 'auto' }}>
                     <button class="btn btn-secondary profile-button" type="button" style={{ width: '40%' }}>Cancelar</button>
@@ -75,7 +75,7 @@ export function CustomTrTd({data, toggleModal}){
             <th scope="row" style={{ textAlign: 'center' }}>{data.id}</th>
             <td style={{ textAlign: 'center' }}>{data.nombre}</td>
             <td style={{ textAlign: 'center' }}>
-            <ButtonLink to={"/editarProovedor"} className="btn btn-primary profile-button" type="button">Editar</ButtonLink>
+            <ButtonLink to={"/editarEmpresa"} className="btn btn-primary profile-button" type="button">Editar</ButtonLink>
             </td>
             <td style={{ textAlign: 'center' }}>
             <button 

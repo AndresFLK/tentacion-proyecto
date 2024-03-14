@@ -1,6 +1,5 @@
 import { ButtonLink } from "../../components/Button";
 import InventoryTable from "../../components/Inventory/InventoryTable";
-import Table from "../../components/Table";
 
 export default function VerInventario(){
     const th = ['IdProducto', 'Nombre', 'Descripcion', 'Cantidad', 'Precio Unitario', 'Proveedor', 'Editar', 'Borrar']

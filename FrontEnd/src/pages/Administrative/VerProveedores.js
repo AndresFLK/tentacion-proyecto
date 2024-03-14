@@ -1,17 +1,15 @@
 import { ButtonLink } from "../../components/Button";
-import InventoryTable from "../../components/Inventory/InventoryTable";
 import SupplierTable from "../../components/Supplier/SupplierTable";
-import Table from "../../components/Table";
 
 export default function VerProveedores(){
     const th = ['IdProveedor', 'Nombre','Editar', 'Borrar']
     const obj1 = {
         id: '1001', 
-        nombre: 'Pechuga de pollo'
+        nombre: 'Pipasa'
     };
     const obj2 = {
         id: '1002', 
-        nombre: 'Arroz'
+        nombre: 'Tio Pelon'
     };
     return (
         
