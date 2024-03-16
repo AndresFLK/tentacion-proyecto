@@ -1,3 +1,4 @@
+import hashlib
 from src.database.db import db
 
 class Usuario(db.Model):
@@ -19,6 +20,12 @@ class Usuario(db.Model):
         self.correo = correo
         self.password = password
         self.id_rol = id_rol
+
+    def hash_password(self):
+        password = self.password.encode('utf-8')
+        hasher = hashlib.sha256()
+        hasher.update(password)
+        self.password = hasher.hexdigest()
 
     def to_json(self):
         return {

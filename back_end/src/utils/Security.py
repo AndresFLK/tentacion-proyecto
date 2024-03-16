@@ -1,3 +1,5 @@
+from functools import wraps
+from flask import request, jsonify
 from decouple import config
 import datetime
 import jwt
@@ -22,20 +24,23 @@ class Security():
 
     @classmethod
     def verify_token(cls, headers):
-        if 'Authorization' in headers.keys():
-            authorization = headers['Authorization']
-            encoded_token = authorization.split(" ")[0]
 
-            if (len(encoded_token) > 0):
-                try:
-                    payload = jwt.decode(encoded_token, cls.secret, algorithms=["HS256"])
-                    rol = payload['rol']
+        if not headers['Authorization'] or headers['Authorization'].count('.') != 2:
+            return False
 
-                    if rol == 'ADMIN':
-                        return True
-                    return False
-                except (jwt.ExpiredSignatureError, jwt.InvalidSignatureError):
-                    return False
+        authorization = headers['Authorization']
+        encoded_token = authorization.split(" ")[0]
+
+        if (len(encoded_token) > 0):
+            try:
+                payload = jwt.decode(encoded_token, cls.secret, algorithms=["HS256"])
+                rol = payload['rol']
+
+                if rol == 'ADMIN':
+                    return True
+                return False
+            except (jwt.ExpiredSignatureError, jwt.InvalidSignatureError, jwt.InvalidTokenError):
+                return False
 
         return False
 
@@ -53,3 +58,22 @@ class Security():
                 except (jwt.ExpiredSignatureError, jwt.InvalidSignatureError):
                     return None
         return None
+
+    @classmethod
+    def custom_middleware(cls, required_keys = None):
+        def decorator(f):
+            @wraps(f)
+            def decorated_function(*args, **kwargs):
+                # if skip_for_methods and request.method in skip_for_methods:
+                    # return f(*args, **kwargs)
+
+                if 'Authorization' not in request.headers:
+                    return jsonify({'error': 'Missing required header.'}), 400
+
+                if required_keys and request.json:
+                    missing_keys = [key for key in required_keys if key not in request.json]
+                    if missing_keys:
+                        return jsonify({'error': 'Missing key(s) in JSON body.', 'missing_keys': missing_keys}), 400
+                return f(*args, **kwargs)
+            return decorated_function
+        return decorator

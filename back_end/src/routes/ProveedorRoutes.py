@@ -21,6 +21,7 @@ def get_proveedores():
             return jsonify({'message': "ERROR", 'success': False})
 
 @main.route('/', methods=['POST'])
+@Security.custom_middleware(required_keys=['nombre'])
 def post_proveedores():
     has_access = Security.verify_token(request.headers)
 
@@ -36,17 +37,15 @@ def post_proveedores():
         return response, 401
 
 @main.route('/<int:id_proveedor>', methods=['PUT'])
+@Security.custom_middleware(required_keys=['nombre'])
 def put_proveedores(id_proveedor: int):
     has_access = Security.verify_token(request.headers)
 
     if has_access:
         try:
-            if 'nombre' in request.json and request.json['nombre']:
-                nombre = request.json['nombre']
-                proveedor = ProveedorService.put_proveedor(nombre, id_proveedor)
-                return jsonify(proveedor.to_json()), 201
-            else:
-                return jsonify({'message': 'El nombre es requerido'}), 400
+            nombre = request.json['nombre']
+            proveedor = ProveedorService.put_proveedor(nombre, id_proveedor)
+            return jsonify(proveedor.to_json()), 201
         except CustomException:
                 return jsonify({'message': "ERROR", 'success': False})
     else:
@@ -54,6 +53,7 @@ def put_proveedores(id_proveedor: int):
         return response, 401
 
 @main.route('/<int:id_proveedor>', methods = ['DELETE'])
+@Security.custom_middleware()
 def delete_proveedores(id_proveedor: int):
     has_access = Security.verify_token(request.headers)
 

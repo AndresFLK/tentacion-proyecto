@@ -10,6 +10,7 @@ from src.services import UsuarioService
 main = Blueprint('usuario_blueprint', __name__)
 
 @main.route('/clientes', methods=['GET'])
+@Security.custom_middleware()
 def get_usuario():
     has_access = Security.verify_token(request.headers)
 
@@ -27,6 +28,7 @@ def get_usuario():
         return response, 401
 
 @main.route('/admins', methods=['GET'])
+@Security.custom_middleware()
 def get_admin():
     has_access = Security.verify_token(request.headers)
 
@@ -44,6 +46,7 @@ def get_admin():
         return response, 401
 
 @main.route('/', methods=['POST'])
+@Security.custom_middleware(required_keys=['nombre', 'cedula', 'password', 'primer_apellido', 'segundo_apellido', 'correo', 'id_rol'])
 def post_usuario():
     has_access = Security.verify_token(request.headers)
 
@@ -66,6 +69,7 @@ def post_usuario():
         return response, 401
 
 @main.route('/<string:cedula>', methods=['PUT'])
+@Security.custom_middleware(required_keys=['nombre', 'primer_apellido', 'segundo_apellido', 'correo', 'id_rol'])
 def put_usuario(cedula):
     has_access = Security.verify_token(request.headers)
 
@@ -87,6 +91,7 @@ def put_usuario(cedula):
         return response, 401
 
 @main.route('/<string:cedula>', methods = ['DELETE'])
+@Security.custom_middleware()
 def delete_empresa(cedula):
     has_access = Security.verify_token(request.headers)
 

@@ -21,6 +21,7 @@ def get_servicio():
         return jsonify({'message': "ERROR", 'success': False})
 
 @main.route('/', methods=['POST'])
+@Security.custom_middleware(required_keys=['titulo', 'tiempo', 'descripcion', 'imagen', 'id_empresa'])
 def post_servicio():
     has_access = Security.verify_token(request.headers)
 
@@ -43,6 +44,7 @@ def post_servicio():
         return response, 401
 
 @main.route('/<int:id_servicio>', methods=['PUT'])
+@Security.custom_middleware(required_keys=['titulo', 'tiempo', 'descripcion', 'imagen', 'id_empresa'])
 def put_servicio(id_servicio: int):
     has_access = Security.verify_token(request.headers)
 
@@ -65,6 +67,7 @@ def put_servicio(id_servicio: int):
         return response, 401
 
 @main.route('/<int:id_servicio>', methods = ['DELETE'])
+@Security.custom_middleware()
 def delete_servicio(id_servicio: int):
     has_access = Security.verify_token(request.headers)
 

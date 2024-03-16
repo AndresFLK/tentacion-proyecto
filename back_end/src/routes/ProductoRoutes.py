@@ -21,6 +21,7 @@ def get_productos():
             return jsonify({'message': "ERROR", 'success': False})
 
 @main.route('/', methods=['POST'])
+@Security.custom_middleware(required_keys=['nombre', 'descripcion', 'precio', 'proveedores'])
 def post_producto():
     has_access = Security.verify_token(request.headers)
 
@@ -42,6 +43,7 @@ def post_producto():
         return response, 401
 
 @main.route('/<int:id_producto>', methods=['PUT'])
+@Security.custom_middleware(required_keys=['nombre', 'descripcion', 'precio', 'proveedores'])
 def put_producto(id_producto: int):
     has_access = Security.verify_token(request.headers)
 
@@ -61,6 +63,7 @@ def put_producto(id_producto: int):
         return response, 401
 
 @main.route('/<int:id_producto>', methods = ['DELETE'])
+@Security.custom_middleware()
 def delete_producto(id_producto: int):
     has_access = Security.verify_token(request.headers)
 

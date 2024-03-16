@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-
 # Errors
 from src.utils.errors.CustomException import CustomException
 # Security
@@ -21,6 +20,7 @@ def get_empresas():
         return jsonify({'message': "ERROR", 'success': False})
 
 @main.route('/', methods=['POST'])
+@Security.custom_middleware(required_keys=['nombre'])
 def post_empresa():
     has_access = Security.verify_token(request.headers)
 
@@ -31,22 +31,20 @@ def post_empresa():
             return jsonify(empresa.to_json()), 201
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
-    else:
-        response = jsonify({'message': 'Unauthorized'})
-        return response, 401
+
+    response = jsonify({'message': 'Unauthorized'})
+    return response, 401
 
 @main.route('/<int:id_empresa>', methods=['PUT'])
+@Security.custom_middleware(required_keys=['nombre'])
 def put_empresa(id_empresa: int):
     has_access = Security.verify_token(request.headers)
 
     if has_access:
         try:
-            if 'nombre' in request.json and request.json['nombre']:
-                nombre = request.json['nombre']
-                empresa = EmpresaService.put_empresa(nombre, id_empresa)
-                return jsonify(empresa.to_json()), 201
-            else:
-                return jsonify({'message': 'El nombre es requerido'}), 400
+            nombre = request.json['nombre']
+            empresa = EmpresaService.put_empresa(nombre, id_empresa)
+            return jsonify(empresa.to_json()), 201
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
     else:
@@ -54,6 +52,7 @@ def put_empresa(id_empresa: int):
         return response, 401
 
 @main.route('/<int:id_empresa>', methods = ['DELETE'])
+@Security.custom_middleware()
 def delete_empresa(id_empresa: int):
     has_access = Security.verify_token(request.headers)
 
