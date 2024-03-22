@@ -4,3 +4,4 @@ from .Empresa import Empresa
 from .Servicio import Servicio
 from .Usuario import Usuario
 from .Rol import Rol
+from .Orden import Orden

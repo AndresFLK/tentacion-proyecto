@@ -4,6 +4,7 @@ from decouple import config as cf
 from config import config
 from src import init_app
 from src.database.db import db
+from src.events.OrdenEvents import OrdenEvents
 
 configuration = config['development']
 app = init_app(configuration)
@@ -16,10 +17,7 @@ migrate = Migrate(app, db)
 
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-@socketio.on('realtime_data')
-def handle_realtime_data(json):
-    print('Received realtime data: ' + str(json))
-    socketio.emit('realtime_update', json)
+OrdenEvents(socketio)
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
