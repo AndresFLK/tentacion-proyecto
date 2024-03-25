@@ -1,6 +1,7 @@
+import os
 from functools import wraps
 from flask import request, jsonify
-from decouple import config
+# from decouple import config
 import datetime
 import jwt
 import pytz
@@ -8,7 +9,7 @@ import pytz
 
 class Security():
 
-    secret = config('JWT_KEY')
+    secret = os.environ['JWT_KEY']
     tz = pytz.timezone("America/Lima")
 
     @classmethod
