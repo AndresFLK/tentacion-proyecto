@@ -4,6 +4,6 @@ back_end/__pycache__/
 back_end/*.py[cod]
 back_end/migrations/
 back_end/pData/
-
 back_end/pytest_cache/
 back_end/.env
+back_end/venv/
