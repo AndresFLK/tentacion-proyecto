@@ -7,9 +7,9 @@ from .routes import ProductoRoutes
 from .routes import EmpresaRoutes
 from .routes import ServicioRoutes
 from .routes import UsuarioRoutes
+from .routes import ReservaRoutes
 
 app = Flask(__name__)
-
 
 def init_app(config):
     # Configuration
@@ -22,5 +22,6 @@ def init_app(config):
     app.register_blueprint(ProductoRoutes.main, url_prefix='/productos')
     app.register_blueprint(EmpresaRoutes.main, url_prefix='/empresas')
     app.register_blueprint(ServicioRoutes.main, url_prefix='/servicios')
+    app.register_blueprint(ReservaRoutes.main, url_prefix='/reservas')
 
     return app

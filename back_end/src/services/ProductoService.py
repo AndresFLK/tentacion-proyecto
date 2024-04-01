@@ -14,6 +14,13 @@ class ProductoService():
             raise CustomException(ex)
 
     @classmethod
+    def get_producto_unique(cls, id_producto: int):
+        try:
+            return Producto.query.filter_by(id_producto = id_producto).first_or_404()
+        except CustomException as ex:
+            raise CustomException(ex)
+
+    @classmethod
     def post_producto(cls, nombre: str, descripcion: str, precio: int, proveedores: list):
         try:
             nuevo_producto = Producto(nombre, descripcion, precio)

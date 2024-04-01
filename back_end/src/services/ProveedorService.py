@@ -14,6 +14,13 @@ class ProveedorService():
             raise CustomException(ex)
 
     @classmethod
+    def get_proveedor_unique(cls, id_proveedor: int):
+        try:
+            return Proveedor.query.filter_by(id_proveedor = id_proveedor).first_or_404()
+        except CustomException as ex:
+            raise CustomException(ex)
+
+    @classmethod
     def post_proveedor(cls, nombre: str):
         try:
             nuevo_proveedor = Proveedor(nombre = nombre)

@@ -19,6 +19,17 @@ def get_empresas():
     except CustomException:
         return jsonify({'message': "ERROR", 'success': False})
 
+@main.route('/<int:id_empresa>', methods=['GET'])
+def get_empresa_unique(id_empresa: int):
+    try:
+        empresas = EmpresaService.get_empresa_unique(id_empresa)
+        if (len(empresas) > 0):
+            return jsonify([empresa.to_json() for empresa in empresas])
+        else:
+            return jsonify({'message': "NOTFOUND", 'success': True})
+    except CustomException:
+        return jsonify({'message': "ERROR", 'success': False})
+
 @main.route('/', methods=['POST'])
 @Security.custom_middleware(required_keys=['nombre'])
 def post_empresa():

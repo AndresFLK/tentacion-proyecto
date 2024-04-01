@@ -14,6 +14,13 @@ class ServicioService():
             raise CustomException(ex)
 
     @classmethod
+    def get_servicio_unique(cls, id_servicio: int):
+        try:
+            return Servicio.query.filter_by(id_servicio = id_servicio).first_or_404()
+        except CustomException as ex:
+            raise CustomException(ex)
+
+    @classmethod
     def post_servicio(cls, titulo: str, tiempo: str, descripcion: str, imagen: str, id_empresa: int):
         try:
             nuevo_servicio = Servicio(titulo = titulo, 

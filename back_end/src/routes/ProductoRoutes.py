@@ -20,6 +20,17 @@ def get_productos():
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
 
+@main.route('/<int:id_producto>', methods=['GET'])
+def get_producto_unique(id_producto: int):
+    try:
+        productos = ProductoService.get_producto_unique(id_producto)
+        if (len(productos) > 0):
+            return jsonify([producto.to_json() for producto in productos])
+        else:
+            return jsonify({'message': "NOTFOUND", 'success': True})
+    except CustomException:
+        return jsonify({'message': "ERROR", 'success': False})
+
 @main.route('/', methods=['POST'])
 @Security.custom_middleware(required_keys=['nombre', 'descripcion', 'precio', 'proveedores'])
 def post_producto():

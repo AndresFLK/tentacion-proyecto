@@ -14,6 +14,13 @@ class EmpresaService():
             raise CustomException(ex)
 
     @classmethod
+    def get_empresa_unique(cls, id_empresa: int):
+        try:
+            return Empresa.query.filter_by(id_empresa = id_empresa).first_or_404()
+        except CustomException as ex:
+            raise CustomException(ex)
+
+    @classmethod
     def post_empresa(cls, nombre: str):
         try:
             nueva_empresa = Empresa(nombre = nombre)

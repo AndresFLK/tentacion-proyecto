@@ -1,9 +1,10 @@
 import os
-#from decouple import config
+from decouple import config
 
 
 class Config():
-    SECRET_KEY = os.environ['SECRET_KEY']
+    # SECRET_KEY = os.environ['SECRET_KEY']
+    SECRET_KEY = config('SECRET_KEY')
 
 
 class DevelopmentConfig(Config):

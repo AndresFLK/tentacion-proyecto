@@ -22,6 +22,13 @@ class UsuarioService():
             raise CustomException(ex)
 
     @classmethod
+    def get_usuario_unique(cls, cedula: str):
+        try:
+            return Usuario.query.filter_by(cedula = cedula).first_or_404()
+        except CustomException as ex:
+            raise CustomException(ex)
+
+    @classmethod
     def post_usuario(cls, cedula, password, nombre, primer_appelido, segundo_apellido, correo, id_rol):
         try:
             password = password.encode('utf-8')

@@ -1,7 +1,7 @@
 import os
 from functools import wraps
 from flask import request, jsonify
-# from decouple import config
+from decouple import config
 import datetime
 import jwt
 import pytz
@@ -9,14 +9,15 @@ import pytz
 
 class Security():
 
-    secret = os.environ['JWT_KEY']
+    # secret = os.environ['JWT_KEY']
+    secret = config('JWT_KEY')
     tz = pytz.timezone("America/Lima")
 
     @classmethod
     def generate_token(cls, authenticated_user):
         payload = {
             'iat': datetime.datetime.now(tz=cls.tz),
-            'exp': datetime.datetime.now(tz=cls.tz) + datetime.timedelta(minutes=10),
+            'exp': datetime.datetime.now(tz=cls.tz) + datetime.timedelta(minutes=1000),
             'cedula': authenticated_user.cedula,
             'nombre': authenticated_user.nombre,
             'rol': authenticated_user.rol.nombre

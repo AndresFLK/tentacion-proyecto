@@ -10,6 +10,7 @@ class Usuario(db.Model):
     correo = db.Column(db.String(40), nullable = False)
     password = db.Column(db.String(256), nullable = False)
     id_rol = db.Column(db.Integer, db.ForeignKey('rol.id_rol'), nullable = False)
+    reservas = db.relationship('Reserva', backref='usuario', lazy='dynamic')
 
     def __init__(self, cedula, password, nombre="", primer_apellido="", 
                  segundo_apellido="", correo="", id_rol=0) -> None:

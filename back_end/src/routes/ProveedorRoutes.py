@@ -20,6 +20,17 @@ def get_proveedores():
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
 
+@main.route('/<int:id_proveedor>', methods=['GET'])
+def get_proveedor_unique(id_proveedor: int):
+    try:
+        proveedores = ProveedorService.get_proveedor_unique(id_proveedor)
+        if (len(proveedores) > 0):
+            return jsonify([proveedor.to_json() for proveedor in proveedores])
+        else:
+            return jsonify({'message': "NOTFOUND", 'success': True})
+    except CustomException:
+        return jsonify({'message': "ERROR", 'success': False})
+
 @main.route('/', methods=['POST'])
 @Security.custom_middleware(required_keys=['nombre'])
 def post_proveedores():

@@ -20,6 +20,17 @@ def get_servicio():
     except CustomException:
         return jsonify({'message': "ERROR", 'success': False})
 
+@main.route('/<int:id_servicio>', methods=['GET'])
+def get_servicio_unique(id_servicio: int):
+    try:
+        servicios = ServicioService.get_servicio_unique(id_servicio)
+        if (len(servicios) > 0):
+            return jsonify([servicio.to_json() for servicio in servicios])
+        else:
+            return jsonify({'message': "NOTFOUND", 'success': True})
+    except CustomException:
+        return jsonify({'message': "ERROR", 'success': False})
+
 @main.route('/', methods=['POST'])
 @Security.custom_middleware(required_keys=['titulo', 'tiempo', 'descripcion', 'imagen', 'id_empresa'])
 def post_servicio():

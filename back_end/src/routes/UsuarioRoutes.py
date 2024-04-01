@@ -27,6 +27,24 @@ def get_usuario():
         response = jsonify({'message': 'Unauthorized'})
         return response, 401
 
+@main.route('/<string:cedula>', methods=['GET'])
+@Security.custom_middleware()
+def get_servicio_unique(cedula: str):
+    has_access = Security.verify_token(request.headers)
+
+    if has_access:
+        try:
+            usuarios = UsuarioService.get_usuario_unique(cedula)
+            if (len(usuarios) > 0):
+                return jsonify([usuario.to_json() for usuario in usuarios])
+            else:
+                return jsonify({'message': "NOTFOUND", 'success': True})
+        except CustomException:
+            return jsonify({'message': "ERROR", 'success': False})
+    else:
+        response = jsonify({'message': 'Unauthorized'})
+        return response, 401
+
 @main.route('/admins', methods=['GET'])
 @Security.custom_middleware()
 def get_admin():
