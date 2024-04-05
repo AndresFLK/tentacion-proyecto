@@ -2,6 +2,10 @@ import { ButtonLink } from "../../components/Button";
 import InventoryTable from "../../components/Inventory/InventoryTable";
 
 export default function VerInventario(){
+
+    const token = sessionStorage.getItem('token');
+    console.log(token);
+
     const th = ['IdProducto', 'Nombre', 'Descripcion', 'Cantidad', 'Precio Unitario', 'Proveedor', 'Editar', 'Borrar']
     const obj1 = {
         id: '1001', 
@@ -19,6 +23,7 @@ export default function VerInventario(){
         precioUnitario: '¢5000.00',
         proveedor: 'Tio Pelon'
     };
+
     return (
         
         <div class="col-md-10 mx-auto">

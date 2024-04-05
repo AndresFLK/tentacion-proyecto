@@ -13,8 +13,8 @@ app = init_app(configuration)
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['PSQL_URI']
-app.config['SQLALCHEMY_DATABASE_URI'] = cf('URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['PSQL_URI']
+# app.config['SQLALCHEMY_DATABASE_URI'] = cf('URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 

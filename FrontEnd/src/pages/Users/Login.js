@@ -1,8 +1,48 @@
-import Button, { ButtonLink } from "../../components/Button";
-import Form from "../../components/Form";
+import { useEffect, useRef, useState } from "react";
+import AuthContext from "../../Context/AuthProvider";
+import { ButtonLink } from "../../components/Button";
+
+import axios from "../../API/axios";
+const LOGIN_URL = "/auth/login";
 
 export default function Login(){
+    
+    const userRef = useRef();
+    const errRef = useRef();
 
+    const [cedula, setCedula] = useState();
+    const [password, setPassword] = useState();
+    const [errMsg, setErrMsg] = useState();
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [cedula, password])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try{
+            const res = await axios.post(LOGIN_URL, JSON.stringify({cedula, password}), 
+                {
+                    headers: {'Content-Type': 'application/json'}
+                }
+            );
+            console.log(JSON.stringify(res?.data))
+
+            const accessToken = res?.data?.token;
+
+            sessionStorage.setItem('token', accessToken);
+            console.log("Token almacenado:", sessionStorage.getItem('token'));
+
+            setCedula('');
+            setPassword('');
+        }catch (err){
+            console.error("Error en la petición", err);
+        }
+    }
 
 
     return(
@@ -20,12 +60,38 @@ export default function Login(){
                                 <h1 class="fw-bolder">¡Bienvenido a Tentación!</h1>
                                 <p class="lead fw-normal text-muted mb-0">Coloca tus datos para Iniciar Sesion</p>
                         </div>
-                        <Form items={['Correo Electronico', 'Contraseña']}>
-                        <div class="d-grid">
-                                <ButtonLink to={"/menu"} className="btn btn-primary btn-lg">Iniciar Sesion</ButtonLink>
+                        <div class="row gx-5 justify-content-center">
+                            <div class="col-xl-8">
+                                <form onSubmit={handleSubmit}>
+                                    <label htmlFor="cedula">Cedula</label>
+                                    <input 
+                                        className="form-control"
+                                        type="text"
+                                        id="cedula"
+                                        ref={userRef}
+                                        autoComplete="off"
+                                        onChange={(e) => setCedula(e.target.value)}
+                                        value={cedula}
+                                        required 
+                                    />
+                                    <label htmlFor="password">Contraseña</label>
+                                    <input 
+                                        className="form-control"
+                                        type="password"
+                                        id="password"
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        value={password}
+                                        required 
+                                    />
+                                    <div class="d-grid">
+                                    <br/><br/>
+                                        <button className="btn btn-primary btn-lg">Iniciar Sesion</button>
+                                    </div>
+                                </form>
                             </div>
-                        </Form>
-                        <br/><br/><br/>
+                        </div>
+                        
+                        <br/><br/>
                         <div class="text-center mb-5">
                             <ButtonLink to={"/registro"} className="btn btn-primary btn-lg" style={{margin: '0 30px 0 0'}}>Crear una Cuenta</ButtonLink>
                             <ButtonLink to={"/recuperarcontra"} className="btn btn-outline-dark btn-lg px-4">Olvide mi Contraseña</ButtonLink>

@@ -9,8 +9,8 @@ import pytz
 
 class Security():
 
-    # secret = os.environ['JWT_KEY']
-    secret = config('JWT_KEY')
+    secret = os.environ['JWT_KEY']
+    # secret = config('JWT_KEY')
     tz = pytz.timezone("America/Lima")
 
     @classmethod
