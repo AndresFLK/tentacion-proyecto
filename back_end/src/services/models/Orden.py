@@ -16,7 +16,7 @@ class Orden(db.Model):
 
     def to_json(self):
         return {
-            'id_empresa': self.id_orden,
+            'id_orden': self.id_orden,
             'descripcion': self.descripcion,
             'num_mesa': self.num_mesa,
             'precio': self.precio,

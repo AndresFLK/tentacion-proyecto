@@ -1,5 +1,5 @@
 from flask_socketio import emit
-from flask import request
+from flask import request, jsonify
 from src.database.db import db
 from src.services.models.Orden import Orden
 from src.utils.Security import Security
@@ -25,8 +25,11 @@ class OrdenEvents():
 
                 jwt_verify = Security.verify_token(headers)
                 if jwt_verify:
-                    cedula = Security.profile_data(headers)
+                    cedula = Security.profile_data(headers) 
+                    all_orders = Orden.query.filter(Orden.estado != 'terminado').all()
+                    orders_json = [orden.to_json() for orden in all_orders]
                     print("Usuario conectado:", cedula)  
+                    emit('order_update', {'ordenes': orders_json}, broadcast=True)
                 else:
                     return False   # Prevents the client from connecting
             except:
@@ -36,16 +39,20 @@ class OrdenEvents():
         def handle_new_order(data):
             # Assuming 'data' contains order details and a list of product IDs
             try:
-                # new_order = Order(state=data['state'])
-                # db.session.add(new_order)
-                db.session.flush()  # Flush to get the new order ID for product association
+                new_order = Orden(descripcion=data['descripcion'], num_mesa=data['num_mesa'], precio=data['precio'], estado=data['estado'])
+                db.session.add(new_order)
+                # db.session.flush()  # Flush to get the new order ID for product association
 
                 # for product_id in data['product_ids']:
                     # product = Product(order_id=new_order.id)  # Add your logic to handle product details
                     # db.session.add(product)
 
                 db.session.commit()
-                # emit('order_update', {'order_id': new_order.id, 'state': new_order.state}, broadcast=True)
+
+                all_orders = Orden.query.filter(Orden.estado != 'terminado').all()
+                orders_json = [orden.to_json() for orden in all_orders]
+
+                emit('order_update', {'ordenes': orders_json}, broadcast=True)
             except Exception as e:
                 emit('error', {'error': str(e)})
 
@@ -53,13 +60,17 @@ class OrdenEvents():
         def handle_update_order_state(data):
             # Assuming 'data' contains order ID and the new state
             try:
-                # order = Order.query.get(data['order_id'])
-                # if order:
-                    # order.state = data['state']
+                order = Orden.query.get(data['id_orden'])
+                if order:
+                    order.estado = data['estado']
                     db.session.commit()
-                    # emit('order_update', {'order_id': order.id, 'state': order.state}, broadcast=True)
-                # else:
-                    # emit('error', {'error': 'Order not found'})
+
+                    all_orders = Orden.query.filter(Orden.estado != 'terminado').all()
+                    orders_json = [orden.to_json() for orden in all_orders]
+
+                    emit('order_update', {'ordenes': orders_json}, broadcast=True)
+                else:
+                    emit('error', {'error': 'Order not found'})
             except Exception as e:
                 emit('error', {'error': str(e)})
 

@@ -20,9 +20,10 @@ db.init_app(app)
 
 migrate = Migrate(app, db)
 
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins='*')
 
 OrdenEvents(socketio)
 
 if __name__ == '__main__':
     socketio.run(app, debug=True, allow_unsafe_werkzeug=True, host='0.0.0.0')
+
