@@ -34,11 +34,10 @@ def get_servicio_unique(cedula: str):
 
     if has_access:
         try:
-            usuarios = UsuarioService.get_usuario_unique(cedula)
-            if (len(usuarios) > 0):
-                return jsonify([usuario.to_json() for usuario in usuarios])
-            else:
-                return jsonify({'message': "NOTFOUND", 'success': True})
+            usuario = UsuarioService.get_usuario_unique(cedula)
+            if usuario:
+                return jsonify(usuario.to_json())
+            return jsonify({'message': "NOTFOUND", 'success': True})
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
     else:
