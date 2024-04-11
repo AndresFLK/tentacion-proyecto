@@ -11,7 +11,7 @@ from src.events.OrdenEvents import OrdenEvents
 configuration = config['development']
 app = init_app(configuration)
 
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "*", "methods": ["PUT", "GET", "POST", "DELETE", "OPTIONS"]}})
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['PSQL_URI']
 # app.config['SQLALCHEMY_DATABASE_URI'] = cf('URI')
