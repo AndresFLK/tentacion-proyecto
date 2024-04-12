@@ -11,7 +11,9 @@ from .routes import UsuarioRoutes
 from .routes import ReservaRoutes
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*", "methods": ["PUT", "GET", "POST", "DELETE", "OPTIONS"]}})
+#CORS(app, resources={r"/*": {"origins": "*", "methods": ["PUT", "GET", "POST", "DELETE", "OPTIONS"]}})
+CORS(app, supports_credentials=True, send_wildcard=True, automatic_options=True)
+
 
 def init_app(config):
     # Configuration
