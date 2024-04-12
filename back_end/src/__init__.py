@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 
 # Routes
 from .routes import AuthRoutes
@@ -10,6 +11,7 @@ from .routes import UsuarioRoutes
 from .routes import ReservaRoutes
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*", "methods": ["PUT", "GET", "POST", "DELETE", "OPTIONS"]}})
 
 def init_app(config):
     # Configuration

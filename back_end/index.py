@@ -1,7 +1,7 @@
 import os
 from flask_migrate import Migrate
 from flask_socketio import SocketIO
-from flask_cors import CORS
+# from flask_cors import CORS
 from decouple import config as cf
 from config import config
 from src import init_app
@@ -11,7 +11,7 @@ from src.events.OrdenEvents import OrdenEvents
 configuration = config['development']
 app = init_app(configuration)
 
-cors = CORS(app, resources={r"/*": {"origins": "*", "methods": ["PUT", "GET", "POST", "DELETE", "OPTIONS"]}})
+# cors = CORS(app, resources={r"/*": {"origins": "*", "methods": ["PUT", "GET", "POST", "DELETE", "OPTIONS"]}})
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['PSQL_URI']
 # app.config['SQLALCHEMY_DATABASE_URI'] = cf('URI')
