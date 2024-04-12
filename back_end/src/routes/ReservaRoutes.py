@@ -23,9 +23,9 @@ def get_reserva():
 @main.route('/<int:id_reserva>', methods=['GET'])
 def get_reserva_unique(id_reserva: int):
     try:
-        reservas = ReservaService.get_reserva_unique(id_reserva)
-        if (len(reservas) > 0):
-            return jsonify([reserva.to_json() for reserva in reservas])
+        reserva = ReservaService.get_reserva_unique(id_reserva)
+        if reserva:
+            return jsonify(reserva.to_json())
         else:
             return jsonify({'message': "NOTFOUND", 'success': True})
     except CustomException:

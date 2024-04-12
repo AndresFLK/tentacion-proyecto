@@ -23,9 +23,9 @@ def get_servicio():
 @main.route('/<int:id_servicio>', methods=['GET'])
 def get_servicio_unique(id_servicio: int):
     try:
-        servicios = ServicioService.get_servicio_unique(id_servicio)
-        if (len(servicios) > 0):
-            return jsonify([servicio.to_json() for servicio in servicios])
+        servicio = ServicioService.get_servicio_unique(id_servicio)
+        if servicio:
+            return jsonify(servicio.to_json())
         else:
             return jsonify({'message': "NOTFOUND", 'success': True})
     except CustomException:

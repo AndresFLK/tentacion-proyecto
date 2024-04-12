@@ -29,7 +29,7 @@ def get_usuario():
 
 @main.route('/<string:cedula>', methods=['GET'])
 @Security.custom_middleware()
-def get_servicio_unique(cedula: str):
+def get_usuario_unique(cedula: str):
     has_access = Security.verify_token(request.headers)
 
     if has_access:

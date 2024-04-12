@@ -23,9 +23,9 @@ def get_proveedores():
 @main.route('/<int:id_proveedor>', methods=['GET'])
 def get_proveedor_unique(id_proveedor: int):
     try:
-        proveedores = ProveedorService.get_proveedor_unique(id_proveedor)
-        if (len(proveedores) > 0):
-            return jsonify([proveedor.to_json() for proveedor in proveedores])
+        proveedor = ProveedorService.get_proveedor_unique(id_proveedor)
+        if proveedor:
+            return jsonify(proveedor.to_json())
         else:
             return jsonify({'message': "NOTFOUND", 'success': True})
     except CustomException:

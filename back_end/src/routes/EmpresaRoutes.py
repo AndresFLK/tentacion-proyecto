@@ -22,9 +22,9 @@ def get_empresas():
 @main.route('/<int:id_empresa>', methods=['GET'])
 def get_empresa_unique(id_empresa: int):
     try:
-        empresas = EmpresaService.get_empresa_unique(id_empresa)
-        if (len(empresas) > 0):
-            return jsonify([empresa.to_json() for empresa in empresas])
+        empresa = EmpresaService.get_empresa_unique(id_empresa)
+        if empresa:
+            return jsonify(empresa.to_json())
         else:
             return jsonify({'message': "NOTFOUND", 'success': True})
     except CustomException:

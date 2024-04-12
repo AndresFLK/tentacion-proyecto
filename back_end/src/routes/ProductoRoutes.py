@@ -23,9 +23,9 @@ def get_productos():
 @main.route('/<int:id_producto>', methods=['GET'])
 def get_producto_unique(id_producto: int):
     try:
-        productos = ProductoService.get_producto_unique(id_producto)
-        if (len(productos) > 0):
-            return jsonify([producto.to_json() for producto in productos])
+        producto = ProductoService.get_producto_unique(id_producto)
+        if producto:
+            return jsonify(producto.to_json())
         else:
             return jsonify({'message': "NOTFOUND", 'success': True})
     except CustomException:
