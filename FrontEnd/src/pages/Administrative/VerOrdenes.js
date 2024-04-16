@@ -10,7 +10,7 @@ export default function VerOrdenes(){
                                     <div class="accordion-collapse collapse show" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <MenuItem 
-                                            titulo={"Hamburguesa Tentación"} 
+                                            titulo={"Hamburguesa Tentaciónsss"} 
                                             desc={"Una jugosa hamburguesa de carne de res premium, acompañada de cebolla caramelizada y queso Gouda ahumado que le aporta un sabor ahumado y suave."} 
                                             img={""} 
                                             price={"¢8,500.00"}/>

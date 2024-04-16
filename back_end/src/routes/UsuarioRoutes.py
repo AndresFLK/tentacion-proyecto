@@ -100,7 +100,9 @@ def put_usuario(cedula):
             id_rol = request.json['id_rol']
 
             usuario = UsuarioService.put_usuario(cedula, password, nombre, primer_apellido, segundo_apellido, correo, id_rol)
-            return jsonify(usuario.to_json()), 201
+            response = jsonify(usuario.to_json())
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 201
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
     else:
