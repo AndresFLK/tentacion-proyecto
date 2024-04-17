@@ -21,9 +21,9 @@ class ProductoService():
             raise CustomException(ex)
 
     @classmethod
-    def post_producto(cls, nombre: str, descripcion: str, precio: int, proveedores: list):
+    def post_producto(cls, nombre: str, descripcion: str, precio: int, proveedores: list, cantidad: int):
         try:
-            nuevo_producto = Producto(nombre, descripcion, precio)
+            nuevo_producto = Producto(nombre, descripcion, precio, cantidad)
             if not isinstance(proveedores, list):
                 proveedores = [proveedores]
 
@@ -40,7 +40,7 @@ class ProductoService():
     
     @classmethod
     def put_producto(cls, id_producto: int, nombre = None, descripcion = None, 
-                     precio = None , proveedores = None):
+                     precio = None , proveedores = None, cantidad = None):
         try:
             producto = Producto.query.get_or_404(id_producto)
 
@@ -52,6 +52,9 @@ class ProductoService():
 
             if precio:
                 producto.precio = precio
+
+            if cantidad:
+                producto.cantidad = cantidad
 
             if proveedores is not None:
                 producto.proveedores = []

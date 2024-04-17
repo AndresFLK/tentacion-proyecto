@@ -21,13 +21,14 @@ class ServicioService():
             raise CustomException(ex)
 
     @classmethod
-    def post_servicio(cls, titulo: str, tiempo: str, descripcion: str, imagen: str, id_empresa: int):
+    def post_servicio(cls, titulo: str, tiempo: str, descripcion: str, imagen: str, id_empresa: int, contacto: str):
         try:
             nuevo_servicio = Servicio(titulo = titulo, 
                                      tiempo = tiempo,
                                      descripcion = descripcion,
                                      imagen = imagen,
-                                     id_empresa = id_empresa)
+                                     id_empresa = id_empresa,
+                                     contacto = contacto)
             db.session.add(nuevo_servicio)
             db.session.commit()
             return nuevo_servicio
@@ -36,7 +37,7 @@ class ServicioService():
     
     @classmethod
     def put_servicio(cls, id_servicio: int, titulo = None, tiempo = None, 
-                     descripcion = None, imagen = None, id_empresa = None):
+                     descripcion = None, imagen = None, id_empresa = None, contacto = None):
         try:
             servicio = Servicio.query.get_or_404(id_servicio)
 
@@ -54,6 +55,9 @@ class ServicioService():
 
             if id_empresa:
                 servicio.id_empresa = id_empresa
+
+            if contacto:
+                servicio.contacto = contacto
 
             db.session.commit()
             return servicio

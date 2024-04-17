@@ -31,14 +31,15 @@ def get_empresa_unique(id_empresa: int):
         return jsonify({'message': "ERROR", 'success': False})
 
 @main.route('/', methods=['POST'])
-@Security.custom_middleware(required_keys=['nombre'])
+@Security.custom_middleware(required_keys=['nombre', 'contacto'])
 def post_empresa():
     has_access = Security.verify_token(request.headers)
 
     if has_access:
         try:
             nombre = request.json['nombre']
-            empresa = EmpresaService.post_empresa(nombre)
+            contacto = request.json['contacto']
+            empresa = EmpresaService.post_empresa(nombre, contacto)
             return jsonify(empresa.to_json()), 201
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
@@ -47,14 +48,15 @@ def post_empresa():
     return response, 401
 
 @main.route('/<int:id_empresa>', methods=['PUT'])
-@Security.custom_middleware(required_keys=['nombre'])
+@Security.custom_middleware(required_keys=['nombre', 'contacto'])
 def put_empresa(id_empresa: int):
     has_access = Security.verify_token(request.headers)
 
     if has_access:
         try:
             nombre = request.json['nombre']
-            empresa = EmpresaService.put_empresa(nombre, id_empresa)
+            contacto = request.json['contacto']
+            empresa = EmpresaService.put_empresa(nombre, id_empresa, contacto)
             return jsonify(empresa.to_json()), 201
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})

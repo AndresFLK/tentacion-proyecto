@@ -21,9 +21,9 @@ class EmpresaService():
             raise CustomException(ex)
 
     @classmethod
-    def post_empresa(cls, nombre: str):
+    def post_empresa(cls, nombre: str, contacto: str):
         try:
-            nueva_empresa = Empresa(nombre = nombre)
+            nueva_empresa = Empresa(nombre = nombre, contacto = contacto)
             db.session.add(nueva_empresa)
             db.session.commit()
             return nueva_empresa
@@ -31,10 +31,11 @@ class EmpresaService():
             raise CustomException(ex)
     
     @classmethod
-    def put_empresa(cls, nombre: str, id_empresa: int):
+    def put_empresa(cls, nombre: str, id_empresa: int, contacto: str):
         try:
             empresa = Empresa.query.get_or_404(id_empresa)
             empresa.nombre = nombre
+            empresa.contacto = contacto
             db.session.commit()
             return empresa
         except CustomException as ex:

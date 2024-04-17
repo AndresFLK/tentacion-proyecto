@@ -11,13 +11,15 @@ class Producto(db.Model):
     nombre = db.Column(db.String(40), nullable = False)
     descripcion = db.Column(db.String(200), nullable = False)
     precio = db.Column(db.Integer, nullable = False)
+    cantidad = db.Column(db.Integer, nullable = False)
     proveedores = db.relationship('Proveedor', secondary = producto_proveedor,
                                   backref = db.backref('productos', lazy = 'dynamic'))
 
-    def __init__(self, nombre, descripcion, precio) -> None:
+    def __init__(self, nombre, descripcion, precio, cantidad) -> None:
        self.nombre = nombre
        self.descripcion = descripcion
        self.precio = precio
+       self.cantidad = cantidad
        self.proveedores = [] 
 
     def to_json(self):
@@ -26,5 +28,6 @@ class Producto(db.Model):
             'nombre': self.nombre,
             'descripcion': self.descripcion,
             'precio': self.precio,
+            'cantidad': self.cantidad,
             'proveedores': [proveedor.nombre for proveedor in self.proveedores]
         }

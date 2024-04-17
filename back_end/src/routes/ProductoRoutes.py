@@ -32,7 +32,7 @@ def get_producto_unique(id_producto: int):
         return jsonify({'message': "ERROR", 'success': False})
 
 @main.route('/', methods=['POST'])
-@Security.custom_middleware(required_keys=['nombre', 'descripcion', 'precio', 'proveedores'])
+@Security.custom_middleware(required_keys=['nombre', 'descripcion', 'precio', 'proveedores', 'cantidad'])
 def post_producto():
     has_access = Security.verify_token(request.headers)
 
@@ -43,9 +43,11 @@ def post_producto():
             nombre = data.get('nombre')
             descripcion = data.get('descripcion')
             precio = data.get('precio')
+            cantidad = data.get('cantidad')
             proveedores = data.get('proveedores', [])
             producto = ProductoService.post_producto(nombre = nombre, descripcion = descripcion, 
-                                                 precio = precio, proveedores = proveedores)
+                                                 precio = precio, proveedores = proveedores,
+                                                     cantidad = cantidad)
             return jsonify(producto.to_json()), 201
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
@@ -54,7 +56,7 @@ def post_producto():
         return response, 401
 
 @main.route('/<int:id_producto>', methods=['PUT'])
-@Security.custom_middleware(required_keys=['nombre', 'descripcion', 'precio', 'proveedores'])
+@Security.custom_middleware(required_keys=['nombre', 'descripcion', 'precio', 'proveedores', 'cantidad'])
 def put_producto(id_producto: int):
     has_access = Security.verify_token(request.headers)
 
@@ -65,7 +67,8 @@ def put_producto(id_producto: int):
             descripcion = data.get('descripcion', None)
             precio = data.get('precio', None)
             proveedores = data.get('proveedores', None)
-            producto = ProductoService.put_producto(id_producto, nombre, descripcion, precio, proveedores)
+            cantidad = data.get('cantidad', None)
+            producto = ProductoService.put_producto(id_producto, nombre, descripcion, precio, proveedores, cantidad)
             return jsonify(producto.to_json()), 201
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})

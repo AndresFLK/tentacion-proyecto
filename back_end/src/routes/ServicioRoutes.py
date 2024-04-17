@@ -32,7 +32,7 @@ def get_servicio_unique(id_servicio: int):
         return jsonify({'message': "ERROR", 'success': False})
 
 @main.route('/', methods=['POST'])
-@Security.custom_middleware(required_keys=['titulo', 'tiempo', 'descripcion', 'imagen', 'id_empresa'])
+@Security.custom_middleware(required_keys=['titulo', 'tiempo', 'descripcion', 'imagen', 'id_empresa', 'contacto'])
 def post_servicio():
     has_access = Security.verify_token(request.headers)
 
@@ -45,8 +45,9 @@ def post_servicio():
             descripcion = data.get('descripcion')
             imagen = data.get('imagen')
             empresa = data.get('id_empresa')
+            contacto = data.get('contacto')
 
-            servicio = ServicioService.post_servicio(titulo, tiempo, descripcion, imagen, empresa)
+            servicio = ServicioService.post_servicio(titulo, tiempo, descripcion, imagen, empresa, contacto)
             return jsonify(servicio.to_json()), 201
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
@@ -55,7 +56,7 @@ def post_servicio():
         return response, 401
 
 @main.route('/<int:id_servicio>', methods=['PUT'])
-@Security.custom_middleware(required_keys=['titulo', 'tiempo', 'descripcion', 'imagen', 'id_empresa'])
+@Security.custom_middleware(required_keys=['titulo', 'tiempo', 'descripcion', 'imagen', 'id_empresa', 'contacto'])
 def put_servicio(id_servicio: int):
     has_access = Security.verify_token(request.headers)
 
@@ -68,8 +69,9 @@ def put_servicio(id_servicio: int):
             descripcion = data.get('descripcion', None)
             imagen = data.get('imagen', None)
             empresa = data.get('id_empresa', None)
+            contacto = data.get('contacto', None)
 
-            servicio = ServicioService.put_servicio(id_servicio, titulo, tiempo, descripcion, imagen, empresa)
+            servicio = ServicioService.put_servicio(id_servicio, titulo, tiempo, descripcion, imagen, empresa, contacto)
             return jsonify(servicio.to_json()), 201
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
