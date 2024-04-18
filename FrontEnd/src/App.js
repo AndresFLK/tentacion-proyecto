@@ -25,6 +25,7 @@ import Home from "./pages/Informatives/Home";
 import Menu from './pages/Menu';
 import CambiarContra from './pages/Passwords/CambiarContra';
 import RecuperarContra from './pages/Passwords/RecuperarContra';
+import FormEditPerfil from './pages/Users/EditPerfil';
 import Login from './pages/Users/Login';
 import Pedir from './pages/Users/Pedir';
 import Perfil from './pages/Users/Perfil';
@@ -70,7 +71,7 @@ function App() {
           <Route path="/crearEmpresa" element={<CrearEmpresa />} />
           <Route path="/verEmpresas" element={<VerEmpresas />} />
           <Route path="/editarEmpresa" element={<EditarEmpresa />} />
-
+          <Route path="/editarPerfil" element={<FormEditPerfil />} />
         </Routes>
       </div>
       <Footer />

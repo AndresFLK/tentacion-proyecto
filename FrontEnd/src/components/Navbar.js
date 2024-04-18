@@ -26,6 +26,11 @@ export default function Navbar(){
         window.location.href = '/';
     }
 
+    function profile(e) {
+        e.preventDefault()
+        window.location.href = '/perfil';
+    }
+
     if(sessionStorage.getItem('token')){
         var userString = sessionStorage.getItem('user');
         var user = JSON.parse(userString);
@@ -72,10 +77,14 @@ export default function Navbar(){
                         }
                         {
                             user &&
-                            <li className="nav-item">
-                            &nbsp
-                                <a className="btn btn-primary" href="#" onClick={logOut}><i class="bi bi-door-open-fill"></i></a>
-                            </li>
+                            <>
+                                <li className="nav-item">
+                                    <a className="btn btn-primary" href="#" onClick={profile} style={{ margin: '0px 15px 0px 15px' }}><i class="bi bi-person-fill"></i></a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="btn btn-primary" href="#" onClick={logOut} ><i class="bi bi-door-open-fill"></i></a>
+                                </li>
+                            </>
                         }
                     </ul>
                 </div>

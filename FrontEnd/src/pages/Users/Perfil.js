@@ -1,83 +1,86 @@
-
+import { useEffect, useState } from "react";
+import { ButtonLink } from "../../components/Button";
 
 export default function Perfil(){
+
+    const token = sessionStorage.getItem('token');
+    console.log(token);
+  
+    const [records, setRecords] = useState([])
+      useEffect(() => {
+          fetch('http://localhost:8008/auth/profile', {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `${token}`  // Add the Authorization header with the token
+              },
+          })
+          .then(response => response.json())
+          .then(data => setRecords(data))
+          .catch(error => console.error('Error al consumir la API:', error));
+      }, []); // The empty array causes this effect to only run on mount
+
+
     return(
         <>
         <br />
         <div class="col-md-9 mx-auto">
             <div class="bg-white shadow rounded overflow-hidden">
-        <div class="px-4 pt-0 pb-4 cover" >
+        <div class="px-4 pt-0 pb-5 cover" >
           <div class="media align-items-end profile-head" style={{display: "flex"}}>
-            <div class="profile mr-3" style={{display: "flex", flexDirection: "column"}}>
-              <img
-                src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
-                alt="..."
-                width="130"
-                class="rounded mb-2 img-thumbnail"
-              />
-              <button class="btn btn-primary profile-button" type="button">Cambiar Foto</button>
-              
-            </div>
+            
             <div class="media-body mb-5 text-white" style={{margin: '0 0 0 30px'}}>
-              <h4 class="mt-0 mb-0">Andres Ospina</h4>
+              <h2 class="mt-0 mb-0">{records.nombre} {records.primer_apellido}</h2>
               <p class="small mb-4">
-                <i class="fas fa-map-marker-alt mr-2"></i>Manuel Antonio
               </p>
             </div>
           </div>
         </div>
-        <br /><br />
-        <div class="px-4 py-3">
+        <div class="px-4">
             <div class="col-md-12">
             <div class="p-3 py-5">
             
                 <div class="row mt-9">
                 
-                <div style={{height: "120px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
-                <div class="row mt-9">
-                    <button class="btn btn-primary profile-button btn-lg" type="button"><i class="bi bi-person-circle"></i> Editar Perfil</button>
-                        <br /><br />
+                <div style={{height: "130px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+                    <div class="row mt-9">
+                    <ButtonLink to={{
+                                      pathname: "/editarPerfil",
+                                      search: `?cedula=${encodeURIComponent(records.cedula)}`
+                                    }}
+                          className="btn btn-primary profile-button btn-lg"
+                        >
+                        <i class="bi bi-person-circle"></i> Editar Perfil
+                </ButtonLink>
                     </div>
                     <div class="row mt-9">
-                    
-                    <button class="btn btn-outline-dark btn-lg px-4" type="button"> <i class="bi bi-basket2-fill"></i> Historial de Pedidos</button>
-                    <br /><br />
+                        <button class="btn btn btn-outline-dark profile-button btn-lg" type="button"><i class="bi bi-calendar-check"></i> Ver Reservas</button>
+                        
                     </div>
                 </div>
-                    
-                    <div class="col-md-12">
+
+
+
+                
+                
+                <div class="col-md-12">
+                <br></br><br></br>
+                    <label class="labels">Cedula:</label> 
+                    <br />
+                    <span class="text-black-50">{records.cedula}</span>
                     <br /><br />
-                        <label class="labels">Cedula:</label> 
-                        <br />
-                        <span class="text-black-50">1-1234-5678</span>
-                        <br /><br />
-                    </div>
+                </div>
                     <div class="col-md-12">
                         <label class="labels">Nombre:</label> 
                         <br />
-                        <span class="text-black-50">Edgar Andres Ospina Perilla</span>
-                        <br /><br />
-                    </div>
-                    <div class="col-md-12">
-                        <label class="labels">Direccion:</label> 
-                        <br />
-                        <span class="text-black-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
-                        <br /><br />
-                    </div>
-                    <div class="col-md-12">
-                        <label class="labels">Telefono:</label> 
-                        <br />
-                        <span class="text-black-50">7102-3745</span>
+                        <span class="text-black-50">{records.nombre} {records.primer_apellido} {records.segundo_apellido}</span>
                         <br /><br />
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Correo Electronico:</label> 
                         <br />
-                        <span class="text-black-50">andres@gmail.com</span>
+                        <span class="text-black-50">{records.correo}</span>
                         <br /><br />
-                    </div>
-                    <div class="col-md-12">
-                        <button class="btn btn-outline-dark px-4" type="button">Cambiar Contraseña</button>
                     </div>
                     
                 </div>
