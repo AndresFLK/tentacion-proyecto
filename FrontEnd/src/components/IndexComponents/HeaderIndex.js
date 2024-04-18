@@ -20,7 +20,7 @@ export default function HeaderIndex(){
                     </div>
                 </div>
                 <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                    <img class="img-fluid rounded-3 my-5" src="https://scontent.fpac1-3.fna.fbcdn.net/v/t39.30808-6/277569183_266717375669050_4407849763631722809_n.jpg?stp=dst-jpg_s960x960&_nc_cat=101&ccb=1-7&_nc_sid=783fdb&_nc_ohc=i5X6TpT5UwIAX_tQk8Y&_nc_ht=scontent.fpac1-3.fna&oh=00_AfBvojGGgPIF909J_6de0Eu2TSLTxemaqv3knFhss8ggyw&oe=65AE82D5" alt="..." />
+                    <img class="img-fluid rounded-3 my-5" src="https://scontent.fsyq3-1.fna.fbcdn.net/v/t39.30808-6/277569183_266717375669050_4407849763631722809_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=9HZwY-6mSm8Ab6WNrSK&_nc_ht=scontent.fsyq3-1.fna&oh=00_AfCRKUaVlcarSZL-yTZOKE5Oju4u-L0-L5sUQfRnhIe58A&oe=66275C55" alt="Bar Restaurante Tentacion" />
                 </div>
                 </div>
             </div>

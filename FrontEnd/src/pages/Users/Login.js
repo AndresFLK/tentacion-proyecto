@@ -1,7 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import AuthContext from "../../Context/AuthProvider";
 import { ButtonLink } from "../../components/Button";
 
 import axios from "../../API/axios";
@@ -9,7 +7,6 @@ const LOGIN_URL = "/auth/login";
 
 export default function Login(){
     
-    const navigate = useNavigate();
 
     const userRef = useRef();
     const errRef = useRef();
@@ -48,7 +45,7 @@ export default function Login(){
                 const decoded = jwtDecode(sessionStorage.getItem('token'));
                 console.log('Decoded JWT:', decoded);
                 sessionStorage.setItem('user', JSON.stringify(decoded));
-                window.location.href = '/';
+                window.location.href = '/Inventario/verInventario';
                 return decoded;
                 
               } catch (error) {
@@ -62,9 +59,6 @@ export default function Login(){
     }
 
     
-    // useEffect(() => {
-            
-    // }, []); // The empty array causes this effect to only run on mount
 
     return(
         <section class="py-5">
@@ -107,15 +101,12 @@ export default function Login(){
                                     <div class="d-grid">
                                     <br/><br/>
                                         <button className="btn btn-primary btn-lg">Iniciar Sesion</button>
+                                        <br/>
+                                        <ButtonLink to={"/registro"} className="btn btn-outline-dark btn-lg">Crear una Cuenta</ButtonLink>
+                            
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                        
-                        <br/><br/>
-                        <div class="text-center mb-5">
-                            <ButtonLink to={"/registro"} className="btn btn-primary btn-lg" style={{margin: '0 30px 0 0'}}>Crear una Cuenta</ButtonLink>
-                            <ButtonLink to={"/recuperarcontra"} className="btn btn-outline-dark btn-lg px-4">Olvide mi Contraseña</ButtonLink>
                         </div>
                         </div> 
                     </div>

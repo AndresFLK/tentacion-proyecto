@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import ReservaUsuario from './Reservas/ReservasUsuario';
 import EditarEmpresa from './components/Companies/editarEmpresa';
 import Footer from './components/Footer';
 import Navbar from "./components/Navbar";
@@ -72,6 +73,7 @@ function App() {
           <Route path="/verEmpresas" element={<VerEmpresas />} />
           <Route path="/editarEmpresa" element={<EditarEmpresa />} />
           <Route path="/editarPerfil" element={<FormEditPerfil />} />
+          <Route path="/reservarMesa" element={<ReservaUsuario />} />
         </Routes>
       </div>
       <Footer />

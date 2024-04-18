@@ -67,7 +67,6 @@ const Pedir = () => {
 
   return (
     <>
-
       <div class="container py-5">
         <div class="row d-flex my-12" >
            <div class="col-md-5" >
