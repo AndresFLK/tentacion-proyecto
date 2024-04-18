@@ -36,7 +36,7 @@ export default function FormEditPerfil(){
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(PUT_URL + JSON.stringify({cedula, nombre, primer_apellido, segundo_apellido, correo}), {
+        axios.put(PUT_URL, JSON.stringify({cedula, nombre, primer_apellido, segundo_apellido, correo}), {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': token
@@ -45,6 +45,7 @@ export default function FormEditPerfil(){
         .then(response => {
         console.log(JSON.stringify(response?.data))
         alert("Modificacion Exitosa")
+        window.location.href = '/perfil';
         })
         .catch(error => {// Handle the error
         });
