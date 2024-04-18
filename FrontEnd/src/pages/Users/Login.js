@@ -1,4 +1,6 @@
+import { jwtDecode } from 'jwt-decode';
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import AuthContext from "../../Context/AuthProvider";
 import { ButtonLink } from "../../components/Button";
 
@@ -7,6 +9,8 @@ const LOGIN_URL = "/auth/login";
 
 export default function Login(){
     
+    const navigate = useNavigate();
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -39,11 +43,28 @@ export default function Login(){
 
             setCedula('');
             setPassword('');
+
+            try {
+                const decoded = jwtDecode(sessionStorage.getItem('token'));
+                console.log('Decoded JWT:', decoded);
+                sessionStorage.setItem('user', JSON.stringify(decoded));
+                window.location.href = '/';
+                return decoded;
+                
+              } catch (error) {
+                console.error('Failed to decode JWT:', error);
+                return null;
+              }
+
         }catch (err){
             console.error("Error en la petición", err);
         }
     }
 
+    
+    // useEffect(() => {
+            
+    // }, []); // The empty array causes this effect to only run on mount
 
     return(
         <section class="py-5">

@@ -15,6 +15,9 @@ export default function Publicidad(){
       .catch(error => console.error('Error al consumir la API:', error));
   }, []); // The empty array causes this effect to only run on mount
 
+  
+  
+
     return(
       <>
         <header class="py-5">

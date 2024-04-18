@@ -11,13 +11,27 @@ export default function Navbar(){
             const token = sessionStorage.getItem('token');
             console.log(token);
             appBWindow.postMessage({ accessToken: token }, 'http://localhost:3000');
-          }, 2000); 
-      }
+        }, 2000); 
+    }
 
-      function handleClick(e) {
+    function handleClick(e) {
         e.preventDefault();
         openAppB();
-      }
+    }
+
+    function logOut(e) {
+        e.preventDefault()
+        sessionStorage.removeItem('token');
+        sessionStorage.clear();
+        window.location.href = '/';
+    }
+
+    if(sessionStorage.getItem('token')){
+        var userString = sessionStorage.getItem('user');
+        var user = JSON.parse(userString);
+        console.log(user.rol); 
+    }
+    
 
     return(
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -47,11 +61,22 @@ export default function Navbar(){
                                 <CustomLink to="/ordenes" className="dropdown-item">Ver Ordenes</CustomLink>
                             </ul>
                         </li>
-                        <ButtonLink to={"/pedir"} className="btn btn-primary">Ver Carrito</ButtonLink>
-                        <i class="bi bi-cart-plus-fill"></i>
-                        <li class="nav-item">
-                        <a className="btn btn-primary" href="#" onClick={handleClick}>Administrative</a>
-                        </li>
+                        
+                        {
+                            user && user.rol === "ADMIN" &&
+                            <li className="nav-item">
+                                <a className="btn btn-primary" href="#" onClick={handleClick}>Administrative</a>
+                                
+                            </li>
+                            
+                        }
+                        {
+                            user &&
+                            <li className="nav-item">
+                            &nbsp
+                                <a className="btn btn-primary" href="#" onClick={logOut}><i class="bi bi-door-open-fill"></i></a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
