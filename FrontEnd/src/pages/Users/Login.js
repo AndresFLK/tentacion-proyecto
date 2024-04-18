@@ -45,7 +45,7 @@ export default function Login(){
                 const decoded = jwtDecode(sessionStorage.getItem('token'));
                 console.log('Decoded JWT:', decoded);
                 sessionStorage.setItem('user', JSON.stringify(decoded));
-                window.location.href = '/Inventario/verInventario';
+                window.location.href = '/';
                 return decoded;
                 
               } catch (error) {
