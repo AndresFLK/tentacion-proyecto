@@ -1,15 +1,16 @@
 import AddItem from "./AddItem";
 
-export default function MenuItem({titulo, desc, price}){
+export default function MenuItem({titulo, desc, img, need, needDesc, price}){
     
 
     return(
         
-            <div class="col-lg-11" style={{paddingLeft: "15px"}}>
+            <div class="col-lg-4">
                 <div class="position-relative mb-5">
+                    <img class="img-fluid rounded-3 mb-3" src={img} />
                     <a class="h4 fw-bolder text-decoration-none link-dark stretched-link" href="#!">{titulo}</a>
                     <br /><br />
-                    <p>{desc}</p>
+                    <NeedDesc va={needDesc} desc={desc}/>
                     <div class="container">
                         
                     </div>
@@ -17,8 +18,16 @@ export default function MenuItem({titulo, desc, price}){
                     
                     <p style={{textAlign:"justify"}}>{price}</p>
                     </div>
+                    
                 </div>
             </div>
     )
 }
 
+
+
+function NeedDesc({va, desc}){
+    if (va == 1) {
+        return (<p style={{textAlign:"justify"}}>{desc}</p>)
+    }
+}
