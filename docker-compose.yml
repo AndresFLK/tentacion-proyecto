@@ -1,0 +1,56 @@
+version: '3.0'
+services:
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    ports:
+      - 5123:5432
+    volumes:
+      - ./back_end/pData:/var/lib/postgresql/data
+    healthcheck:      
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} -t 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 10s
+    environment:
+      POSTGRES_USER: "tentacion_admin"
+      POSTGRES_PASSWORD: "tentacion1234!?"
+      POSTGRES_DB: "tentacion_db"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+  tentacion-back_end:
+    container_name: tentacion-back_end
+    build:
+      context: ./back_end/
+      dockerfile: Dockerfile
+    ports:
+      - 8008:5000    
+    depends_on:
+      db:
+        condition: service_healthy    
+    links: 
+        - db
+  tentacion-front_end:
+    container_name: tentacion-front_end
+    build: 
+      context: ./FrontEnd/
+      dockerfile: Dockerfile
+    ports: 
+      - 8080:3000
+    depends_on:
+      - tentacion-back_end
+    links:
+      - tentacion-back_end
+  tentacion-admin:
+    container_name: tentacion-admin
+    build: 
+      context: ./Admin/
+      dockerfile: Dockerfile
+    ports: 
+      - 3000:3000
+    depends_on:
+      - tentacion-front_end
+    links:
+      - tentacion-front_end
+

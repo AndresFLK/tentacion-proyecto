@@ -8,7 +8,7 @@ ENV USERNAME=cool-app
 ENV WORKING_DIR=/home/cool-app
 ENV SECRET_KEY=B!1w8*NAt1T^%kvhUI*S^_
 ENV JWT_KEY=D5*F?_1?-d$f*1
-ENV PSQL_URI=postgresql://db:5432/cool_db
+ENV PSQL_URI=postgresql://tentacion_admin:tentacion1234!?@db:5432/tentacion_db
 
 WORKDIR ${WORKING_DIR}
 
