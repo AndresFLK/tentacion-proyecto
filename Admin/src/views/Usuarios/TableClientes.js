@@ -32,16 +32,24 @@ const TableClientes = () => {
 
   const [records, setRecords] = useState([])
     useEffect(() => {
-        fetch('http://localhost:8008/usuarios/clientes', {
-          method: "GET",
-          headers: {
-            Authorization: token
-          }
-        })
-        .then(response => response.json())
-        .then(data => setRecords(data))
-        .catch(error => console.error('Error al consumir la API:', error));
-    }, []); // The empty array causes this effect to only run on mount
+      fetch('http://localhost:8008/usuarios/clientes', {
+        method: "GET",
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Asegúrate de que data es un arreglo antes de actualizar el estado
+        if (Array.isArray(data)) {
+          setRecords(data);
+        } else {
+          console.error('La API no devolvió un arreglo como se esperaba');
+        }
+      })
+      .catch(error => console.error('Error al consumir la API:', error));
+    }, []); // El array vacío hace que este efecto se ejecute solo una vez al montarse el componente
+    
 
 
     const borrar = async (cedula) => {
