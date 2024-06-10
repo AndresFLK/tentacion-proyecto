@@ -44,13 +44,8 @@ class UsuarioService():
             raise CustomException(ex)
     
     @classmethod
-    def put_usuario(cls, cedula, password, nombre, primer_appelido, segundo_apellido, correo, id_rol):
+    def put_usuario(cls, cedula, nombre, primer_appelido, segundo_apellido, correo, id_rol):
         try:
-            password = password.encode('utf-8')
-            hasher = hashlib.sha256()
-            hasher.update(password)
-            password_hash = hasher.hexdigest()
-
             usuario = Usuario.query.get_or_404(cedula)
             usuario.nombre = nombre
             usuario.cedula = cedula
@@ -58,7 +53,6 @@ class UsuarioService():
             usuario.segundo_apellido = segundo_apellido
             usuario.correo = correo
             usuario.id_rol = id_rol
-            usuario.password = password_hash
 
             db.session.commit()
             return usuario

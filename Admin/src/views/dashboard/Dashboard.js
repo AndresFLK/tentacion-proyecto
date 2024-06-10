@@ -178,7 +178,7 @@ const Dashboard = () => {
 
 
   window.addEventListener('message', (event) => {
-    if (event.origin === 'http://localhost:5000') {
+    if (event.origin === 'http://localhost:8080') {
       // Check if the message contains JWT
       if (event.data.accessToken) {
         // Store the JWT in local storage (or another method of your choice)

@@ -93,13 +93,12 @@ def put_usuario(cedula):
     if has_access:
         try:
             nombre = request.json['nombre']
-            password = request.json['password']
             primer_apellido = request.json['primer_apellido']
             segundo_apellido = request.json['segundo_apellido']
             correo = request.json['correo']
             id_rol = request.json['id_rol']
 
-            usuario = UsuarioService.put_usuario(cedula, password, nombre, primer_apellido, segundo_apellido, correo, id_rol)
+            usuario = UsuarioService.put_usuario(cedula, nombre, primer_apellido, segundo_apellido, correo, id_rol)
             response = jsonify(usuario.to_json())
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 201
