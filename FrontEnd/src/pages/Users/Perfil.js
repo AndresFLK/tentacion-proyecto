@@ -24,17 +24,25 @@ export default function Perfil(){
     const [reservas, setReservas] = useState([])
     const getReservas = () => {
         fetch('http://localhost:8008/reservas/mis-reservas', {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `${token}`  // Add the Authorization header with the token
-              },
-          })
-          .then(response => response.json())
-          .then(data => setReservas(data))
-          .then(console.log(reservas))
-          .catch(error => console.error('Error al consumir la API:', error));
-    }  
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${token}`  // Añadir el encabezado de autorización con el token
+          },
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Asegúrate de que data es un arreglo antes de actualizar el estado
+          if (Array.isArray(data)) {
+            setReservas(data);
+            console.log(data); // Muestra los datos obtenidos en la consola
+          } else {
+            console.error('La API no devolvió un arreglo como se esperaba');
+          }
+        })
+        .catch(error => console.error('Error al consumir la API:', error));
+    }
+      
 
     const reservar = () => {
         window.location.href = '/reservarMesa';
